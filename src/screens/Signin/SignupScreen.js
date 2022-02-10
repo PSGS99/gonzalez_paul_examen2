@@ -1,8 +1,8 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { StyleSheet, Text, View, TextInput, Alert } from "react-native";
 import { colors } from "../../assets";
 import { Button, Gap } from "../../components/atoms";
-
+import { getUsers } from '../../api'
 import { AuthContext } from "../../components/context";
 
 const SigninScreen = ({ route, navigation }) => {
@@ -17,8 +17,29 @@ const SigninScreen = ({ route, navigation }) => {
   const { signUp } = useContext(AuthContext);
 
   const handleSignup = (username, email, password) => {};
+  const verificarCedula = validateCedula(username)
+  const verificarMail = validateCedula(email)
+  const verificarPass = validateCedula(password)
+
+  console.log('La cedula', isValidCedula);
+  console.log('El mail', isValidMail);
+  console.log('COntrase;a', isValidPassword);
+  
   //cambiar
   const [mails, setMails] = useState([])
+
+  //llamar 
+  useEffect(() => {
+    fetchUsers();
+
+  }, [])
+
+  //llamar
+  const fetchUsers = async () => {
+    const rta = await getUsers()
+    const mails = rta.map(user => user.email)
+    setMails(mails)
+  }
 
   //validar cedula
   function validar(cad) {
