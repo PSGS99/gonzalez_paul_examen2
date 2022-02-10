@@ -25,6 +25,15 @@ const SigninScreen = ({ route, navigation }) => {
     }
   };
 
+  const psgsValidatePass = () => {
+    let validate = `/^(?=.[a-z])(?=.[A-Z])(?=.[~'!@#$%^&)(-+=]).{6,10}$/`;
+    let r = new RegExp(validate)
+
+    let isTrue = r.test(pass)
+
+    return isTrue
+  }
+
   function notifyMessage(msg) {
     Alert.alert("Aviso", msg, [
       { text: "OK", onPress: () => console.log("OK Pressed") },
@@ -56,7 +65,6 @@ const SigninScreen = ({ route, navigation }) => {
         placeholder="Constraseña"
         style={styles.input}
         onChangeText={(text) => setPassword(text)}
-        secureTextEntry
       />
 
       {isValidUser ? null : (
