@@ -31,7 +31,7 @@ const SigninScreen = ({ route, navigation }) => {
       notifyMessage("Usuario creado correctamente");
       navigation.navigate("GetStarted");
     } else {
-      notifyMessage("Los datos de ingreso estan incorrectos");
+      notifyMessage("Datos incorrectos");
     }
 
   };
