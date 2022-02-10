@@ -119,7 +119,7 @@ const SigninScreen = ({ route, navigation }) => {
         style={styles.input}
         onChangeText={(text) => setEmail(text)}
       />
-      
+
       <TextInput
         placeholder="Contraseña"
         style={styles.input}
