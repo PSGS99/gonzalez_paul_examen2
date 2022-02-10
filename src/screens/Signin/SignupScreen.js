@@ -16,14 +16,14 @@ const SigninScreen = ({ route, navigation }) => {
 
   const { signUp } = useContext(AuthContext);
 
-  const handleSignup = (username, email, password) => {};
-  const verificarCedula = validateCedula(username)
-  const verificarMail = validateCedula(email)
-  const verificarPass = validateCedula(password)
-
-  console.log('La cedula', isValidCedula);
-  console.log('El mail', isValidMail);
-  console.log('COntrase;a', isValidPassword);
+  const handleSignup = (username, email, password) => {
+    const verificarCedu = validarCed(username)
+    const verificarPass = validarPass(password)
+    const verificarMail = validarEmail(email)
+    console.log('La cedula', verificarCedu);
+    console.log('El mail', verificarMail);
+    console.log('COntrase;a', verificarPass);
+  };
   
   //cambiar
   const [mails, setMails] = useState([])
@@ -41,8 +41,8 @@ const SigninScreen = ({ route, navigation }) => {
     setMails(mails)
   }
 
-  //validar cedula
-  function validar(cad) {
+  //validar cedular
+  function validarCed(cad) {
     var total = 0;
     var longitud = cad.length;
     var longcheck = longitud - 1;
@@ -69,8 +69,9 @@ const SigninScreen = ({ route, navigation }) => {
     }
     return valida;
   }
+
   //validar contraseña
-  function checkPassword(valor) {
+  function validarPass(valor) {
     var myregex =
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!.%*?&])([A-Za-z\d$@$!%*?&]|[^ ]){6,10}$/;
     if (myregex.test(valor)) {
@@ -79,8 +80,9 @@ const SigninScreen = ({ route, navigation }) => {
       return false;
     }
   }
+
   //validar mail
-  const validateEmail = (email) => {
+  const validarEmail = (email) => {
     const exist = mails.some((mail) => mail === email);
     return exist;
   };
@@ -93,7 +95,7 @@ const SigninScreen = ({ route, navigation }) => {
 
   return (
     <View>
-      <Gap height={200} />
+      <Gap height={100} />
       <View style={styles.wrapperSlogan}>
         <Text style={styles.txtSlogan}>Crear Nuevo Usuario </Text>
       </View>
