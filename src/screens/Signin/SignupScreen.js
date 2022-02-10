@@ -17,12 +17,13 @@ const SigninScreen = ({ route, navigation }) => {
   const { signUp } = useContext(AuthContext);
 
   const handleSignup = (username, email, password) => {
-    const t = signUp(username, email, password);
+    
+    /*const t = signUp(username, email, password);
     if (t != undefined) {
       setCreado(true);
       notifyMessage("Usuario creado correctamente");
       navigation.navigate("GetStarted");
-    }
+    }*/
   };
 
   /*const PSGS_ValidatePass = () => {
