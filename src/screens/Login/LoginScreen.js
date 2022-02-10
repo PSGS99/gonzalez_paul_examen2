@@ -45,10 +45,10 @@ const Login = ({ navigation }) => {
         <Text style={styles.txtSlogan}>en una APP</Text>
       </View>
 
-      <Gap height={30} />
+      <Gap height={15} />
 
       <TextInput
-        placeholder="Correo electronico"
+        placeholder="Email: pgonzalez4756@uta.edu.ec"
         style={styles.input}
         onChangeText={(text) => setEmail(text)}
       />
@@ -57,7 +57,7 @@ const Login = ({ navigation }) => {
       )}
 
       <TextInput
-        placeholder="Constraseña"
+        placeholder="Constraseña: Paul19@"
         style={styles.input}
         onChangeText={(text) => setPassword(text)}
         secureTextEntry
@@ -73,7 +73,7 @@ const Login = ({ navigation }) => {
         }}
         text="Acceder"
       />
-      <Gap height={20} />
+      <Gap height={10} />
 
       <Button
         onPress={() => navigation.replace("Signup")} // SignUp Component
@@ -107,8 +107,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     paddingVertical: 10,
     borderRadius: 10,
-    marginVertical: 10,
-    marginHorizontal: 40,
+    marginVertical: 5,
+    marginHorizontal: 25,
   },
   buttonContainer: {
     width: "60%",
