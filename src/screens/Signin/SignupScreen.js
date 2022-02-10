@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { StyleSheet, Text, View, TextInput, Alert } from "react-native";
 import { colors } from "../../assets";
 import { Button, Gap } from "../../components/atoms";
-import { getUsers } from '../../api'
+import { getUsers } from "../../api";
 import { AuthContext } from "../../components/context";
 
 const SigninScreen = ({ route, navigation }) => {
@@ -17,32 +17,40 @@ const SigninScreen = ({ route, navigation }) => {
   const { signUp } = useContext(AuthContext);
 
   const handleSignup = (username, email, password) => {
-    const verificarCedu = validarCed(username)
-    const verificarPass = validarPass(password)
-    const verificarMail = validarEmail(email)
-    console.log('La cedula', verificarCedu);
-    console.log('El mail', verificarMail);
-    console.log('COntrase;a', verificarPass);
+    const verificarCedu = PSGS_validarCed(username);
+    const verificarPass = PSGS_validarPass(password);
+    const verificarMail = PSGS_validarEmail(email);
+
+    /*console.log('La cedula: ', verificarCedu);
+    console.log('El mail: ', verificarMail);
+    console.log('Contraseña: ', verificarPass);*/
+
+    if (verificarCedu && verificarMail && verificarPass) {
+      const rta = signUp(username, email, password);
+      rta.then(console.log);
+      notifyMessage("Usuario creado correctamente");
+      navigation.navigate("GetStarted");
+    } else {
+      notifyMessage("Los datos de ingreso estan incorrectos");
+    }
+
   };
-  
-  //cambiar
-  const [mails, setMails] = useState([])
 
-  //llamar 
+  const [correo, setMails] = useState([]);
+
+  //llamar usuarios
   useEffect(() => {
-    fetchUsers();
+    callUsers();
+  }, []);
 
-  }, [])
+  //llamar usuarios
+  const callUsers = async () => {
+    const rta = await getUsers();
+    const correo = rta.map((user) => user.email);
+    setMails(correo);
+  };
 
-  //llamar
-  const fetchUsers = async () => {
-    const rta = await getUsers()
-    const mails = rta.map(user => user.email)
-    setMails(mails)
-  }
-
-  //validar cedular
-  function validarCed(cad) {
+  function PSGS_validarCed(cad) {
     var total = 0;
     var longitud = cad.length;
     var longcheck = longitud - 1;
@@ -70,8 +78,7 @@ const SigninScreen = ({ route, navigation }) => {
     return valida;
   }
 
-  //validar contraseña
-  function validarPass(valor) {
+  function PSGS_validarPass(valor) {
     var myregex =
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!.%*?&])([A-Za-z\d$@$!%*?&]|[^ ]){6,10}$/;
     if (myregex.test(valor)) {
@@ -81,10 +88,9 @@ const SigninScreen = ({ route, navigation }) => {
     }
   }
 
-  //validar mail
-  const validarEmail = (email) => {
-    const exist = mails.some((mail) => mail === email);
-    return exist;
+  const PSGS_validarEmail = (email) => {
+    const exist = correo.some((mail) => mail === email);
+    return !exist;
   };
 
   function notifyMessage(msg) {
@@ -103,7 +109,7 @@ const SigninScreen = ({ route, navigation }) => {
       <Gap height={60} />
 
       <TextInput
-        placeholder="Nombre de usuario"
+        placeholder="Cedula"
         style={styles.input}
         onChangeText={(text) => setUserName(text)}
       />
@@ -115,7 +121,7 @@ const SigninScreen = ({ route, navigation }) => {
       />
 
       <TextInput
-        placeholder="Constraseña"
+        placeholder="Contraseña"
         style={styles.input}
         onChangeText={(text) => setPassword(text)}
       />
