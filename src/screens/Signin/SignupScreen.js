@@ -142,6 +142,7 @@ const SigninScreen = ({ route, navigation }) => {
   );
 };
 
+
 export default SigninScreen;
 
 // Styles
