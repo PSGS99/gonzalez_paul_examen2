@@ -16,24 +16,11 @@ const SigninScreen = ({ route, navigation }) => {
 
   const { signUp } = useContext(AuthContext);
 
-  const handleSignup = (username, email, password) => {
-    /*const t = signUp(username, email, password);
-    if (t != undefined) {
-      setCreado(true);
-      notifyMessage("Usuario creado correctamente");
-      navigation.navigate("GetStarted");
-    }*/
-  };
+  const handleSignup = (username, email, password) => {};
+  //cambiar
+  const [mails, setMails] = useState([])
 
-  /*const PSGS_ValidatePass = () => {
-    let validate = `/^(?=.[a-z])(?=.[A-Z])(?=.[~'!@#$%^&)(-+=]).{6,10}$/`;
-    let r = new RegExp(validate)
-
-    let isTrue = r.test(pass)
-
-    return isTrue
-  }*/
-
+  //validar cedula
   function validar(cad) {
     var total = 0;
     var longitud = cad.length;
@@ -61,6 +48,21 @@ const SigninScreen = ({ route, navigation }) => {
     }
     return valida;
   }
+  //validar contraseña
+  function checkPassword(valor) {
+    var myregex =
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!.%*?&])([A-Za-z\d$@$!%*?&]|[^ ]){6,10}$/;
+    if (myregex.test(valor)) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+  //validar mail
+  const validateEmail = (email) => {
+    const exist = mails.some((mail) => mail === email);
+    return exist;
+  };
 
   function notifyMessage(msg) {
     Alert.alert("Aviso", msg, [
