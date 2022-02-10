@@ -25,14 +25,14 @@ const SigninScreen = ({ route, navigation }) => {
     }
   };
 
-  const psgsValidatePass = () => {
+  /*const PSGS_ValidatePass = () => {
     let validate = `/^(?=.[a-z])(?=.[A-Z])(?=.[~'!@#$%^&)(-+=]).{6,10}$/`;
     let r = new RegExp(validate)
 
     let isTrue = r.test(pass)
 
     return isTrue
-  }
+  }*/
 
   function notifyMessage(msg) {
     Alert.alert("Aviso", msg, [
