@@ -111,7 +111,7 @@ const Detail = ({ route, navigation, handleAddToCart }) => {
             </ScrollView>
           </View>
           {/* button add to cart */}
-          <Gap height={50} />
+          <Gap height={20} />
           <Button
             text="Add to cart"
             onPress={() => AddToCart(item, totalItem)}
@@ -134,8 +134,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   image: {
-    height: 150,
-    width: 150,
+    height: 100,
+    width: 100,
     resizeMode: "contain",
   },
   content: {
